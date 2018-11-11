@@ -1,6 +1,4 @@
-# Kinect
-
-Struct:
+# Struct:
 - Detection folder
 - Drawing folder + arduino parser
 - Other not interesting folders/files
@@ -18,11 +16,11 @@ Struct:
   It's main file for the project. Here you can set a model of an action. 
   In the variable with name "plan" you can configure the model. Just put there a list of commands in string format and separete it with "|"
   Here's a list of possible commands:
-  - ```objects()``` --> draw all detected objects
-  - ```marker()```  --> draw ArUco markers
-  - ```qrcode()```  --> draw qrcode markers
-  - ```bottles()``` --> draw bottles only
-  - ```colors()```  --> comming soon
+  - ```objects()``` **--> draw all detected objects**
+  - ```marker()```  **--> draw ArUco markers**
+  - ```qrcode()```  **--> draw qrcode markers**
+  - ```bottles()``` **--> draw bottles only**
+  - ```colors()```  **--> comming soon**
 
 ### BasicFunctions.py
   Here are lots of my custom function an nothing interesting.
