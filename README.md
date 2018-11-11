@@ -73,7 +73,6 @@
    ``` python
 	drawObjects(globalName, frame, filter="person", return_bottle_imgs = True)
   ```
-  , or don't do it, if you want to detect any object 
   4) You also can detect any kind of objects from list with name ```CLASSES``` in *Detect/ObjectDetection.py*. Just replace parametr ```filter``` (see section 3) to a string from ```CLASSES``` list
   
   
