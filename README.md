@@ -47,7 +47,7 @@
   
   
   **Task #2:**
-      You have to detect and follow a buttle.
+      You have to detect and follow a bottle.
       
   **Solve:**
   1) Put the following code to *Detection/ObjectDetection.py*  after the 42th line
