@@ -65,7 +65,15 @@
 	eval('gt(' + str(angle) + ', ' + str(int(dist)-350) + ')') #jast generate and send command to the Arduino (angle and dist are already calculated)
   ```
   2) Set variable ```plane``` in *main.py* to ```objects()```
-  3.1) In *main.py* replace ```drawObjects(globalName, frame, filter="all", return_bottle_imgs = True)``` with ```drawObjects(globalName, frame, filter="person", return_bottle_imgs = True)```, or don't do it, if you want to detect any object 
+  3.1) In *main.py* replace 
+  ``` python
+	drawObjects(globalName, frame, filter="all", return_bottle_imgs = True)
+  ```
+   with 
+   ``` python
+	drawObjects(globalName, frame, filter="person", return_bottle_imgs = True)
+  ```
+  , or don't do it, if you want to detect any object 
   3.2) You also can detect any kind of objects from list with name ```CLASSES``` in *Detect/ObjectDetection.py*
   
   
