@@ -24,3 +24,21 @@
 
 ### BasicFunctions.py
   There are lots of custom function and nothing interesting.
+
+# Examples
+
+### Example #1 ###
+
+  **Task:**
+      You have to detect and follow an ArUco marker.
+      
+  **Solve:**
+  1) Put the following code to *Detection/MarkerDetection.py*  after the 42th line
+  ``` python
+  if calibrateByMarker and ids[0][0] == goalMarker and ft: #check if detected marker looks like a goal marker; "ft" make it only one time
+            cv2.drawContours(frame,[np.int0(rect)],-1,(0,0,255),3)
+            mov = "gt("+str(angle) + ", " + str(dist+250) + ")" #"f(" + str(dist-200) + ")" #generate command for arduino
+            evl(mov) #send command to arduino
+            ft = False;
+  ```
+  2) Set variable ```plane``` in *main.py* to ```marker()```
