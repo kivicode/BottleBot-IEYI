@@ -43,6 +43,8 @@
   ```
   2) Set variable ```plane``` in *main.py* to ```marker()```
   
+  ---
+  
   
   **Task #2:**
       You have to detect and follow a buttle.
@@ -54,7 +56,7 @@
   ```
   2) Set variable ```plane``` in *main.py* to ```buttle()```
   
-  
+  ---
   
    **Task #3**
       You have to detect and follow a person.
