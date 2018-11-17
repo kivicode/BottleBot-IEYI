@@ -71,7 +71,7 @@
   ``` python
 	drawObjects(globalName, frame, filter="all", return_bottle_imgs = True)
   ```
-   with 
+   by 
    ``` python
 	drawObjects(globalName, frame, filter="person", return_bottle_imgs = True)
   ```
