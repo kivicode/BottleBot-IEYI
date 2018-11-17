@@ -62,7 +62,7 @@
       You have to detect and follow a person.
       
   **Solve:**
-  1) Put the following code to *Detection/ObjectDetection.py*  after the 42th line
+  1) Put the following code to *Detection/ObjectDetection.py*  after the 85th line
   ``` python
 	eval('gt(' + str(angle) + ', ' + str(int(dist)-350) + ')') #jast generate and send command to the Arduino (angle and dist are already calculated)
   ```
