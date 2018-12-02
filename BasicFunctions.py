@@ -1,9 +1,7 @@
 from PIL import Image
 from Drawing.DrawWay import *
-#import kinect_lib.freenect as freenect
-import freenect
-
-from Drawing.ParseArduino import eval as evl
+import kinect_lib.freenect as freenect
+# from Drawing.ParseArduino import eval as evl
 import cv2
 import numpy as np
 import math
@@ -11,7 +9,6 @@ import time
 import serial
 import time
 # arduinoData = serial.Serial('/dev/tty.wchusbserial1420', 9600)
-#import frame_convert2
 
 threshold = 0
 current_depth = 0
@@ -20,17 +17,17 @@ current_depth = 0
 mov_x = 0.08
 mov_y = 0.06
 
-#cam = cv2.VideoCapture(0#)
-#cam.set(3 , 640  ) # width        
-#cam.set(4 , 480  ) # height       
-#cam.set(10, 120  ) # brightness     min: 0   , max: 255 , increment:1  
-#cam.set(11, 50   ) # contrast       min: 0   , max: 255 , increment:1     
-#cam.set(12, 70   ) # saturation     min: 0   , max: 255 , increment:1
-#cam.set(13, 13   ) # hue         
-#cam.set(14, 50   ) # gain           min: 0   , max: 127 , increment:1
-#cam.set(15, -3   ) # exposure       min: -7  , max: -1  , increment:1
-#cam.set(17, 5000 ) # white_balance  min: 4000, max: 7000, increment:1
-#cam.set(28, 0    ) # focus          min: 0   , max: 255 , increment:5
+cam = cv2.VideoCapture(0)
+cam.set(3 , 640  ) # width        
+cam.set(4 , 480  ) # height       
+cam.set(10, 120  ) # brightness     min: 0   , max: 255 , increment:1  
+cam.set(11, 50   ) # contrast       min: 0   , max: 255 , increment:1     
+cam.set(12, 70   ) # saturation     min: 0   , max: 255 , increment:1
+cam.set(13, 13   ) # hue         
+cam.set(14, 50   ) # gain           min: 0   , max: 127 , increment:1
+cam.set(15, -3   ) # exposure       min: -7  , max: -1  , increment:1
+cam.set(17, 5000 ) # white_balance  min: 4000, max: 7000, increment:1
+cam.set(28, 0    ) # focus          min: 0   , max: 255 , increment:5
 
 def auto_canny(image, sigma=0.33):
     # compute the median of the single channel pixel intensities
@@ -60,7 +57,12 @@ def change_threshold(value):
 def followPoint(point):
     dist = int(getDist(point[0],point[1]))-100
     angle = getAngleFromDepth(point[0], point[1],dist,640)
-#    evl("gt(" + str(int(angle*1.2)) + ", " + str(dist-100) + ")")
+    side = 'right'
+    if angle < 0:
+        side = 'left'
+    rot = side + '('+str(int((abs(angle))*1.78 / 2.5))+');'
+    evl(rot)
+    evl('f('+str(int(dist))+');')
 
 
 def change_contrast(img, level):
@@ -170,8 +172,8 @@ def getDist(x, y):
     x+=10
     frame = getDepthMap()
     color = frame[int(y),int(x)] 
- #   cv2.circle(frame, (int(x), int(y)), 5, (255,0,0), 2) 
-#    cv2.imshow("Test", frame)      
+    cv2.circle(frame, (int(x), int(y)), 5, (255,0,0), 2) 
+    cv2.imshow("Test", frame)      
     color = int(map(color,0,255,0,1024))+60
     color *= 1.19
     color -= 20
