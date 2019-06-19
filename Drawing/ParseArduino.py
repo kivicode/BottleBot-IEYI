@@ -4,93 +4,81 @@ from Drawing.DrawWay import *
 import BasicFunctions as bf
 
 try:
-     arduinoData = serial.Serial('/dev/ttyACM0', 9600)
+    arduinoData = serial.Serial('/dev/tty.usbmodem14201', 9600)
 except Exception as e:
-     print(e)
-try:
-     arduinoMon = serial.Serial('/dev/ttyUSB0', 9600)
-except Exception as e:
-     arduinoMon = None
-     print(e)
-# delay(1000)
+    print(e)
 way = []
 
-#print(arduinoData, arduinoMon)
 
 def forward(dist):
-     arduinoData.write(('f(' + dist + ')').encode())
+    arduinoData.write(('f(' + dist + ')').encode())
+
+
 def backward(dist):
-     arduinoData.write('b(' + dist + ')'.encode());
+    arduinoData.write('b(' + dist + ')'.encode());
+
+
 def left():
-     arduinoData.write('left'.encode());
+    arduinoData.write('left'.encode());
+
+
 def right():
-     arduinoData.write('right'.encode());
+    arduinoData.write('right'.encode());
+
 
 def parseTxt(filename):
-	str = open(filename, 'r').read()
-	for cmd in str.split(";"):
-		print(cmd)
-		arduinoData.write(cmd.encode())
-		time.sleep(1)
+    str = open(filename, 'r').read()
+    for cmd in str.split(";"):
+        print(cmd)
+        arduinoData.write(cmd.encode())
+
 
 def readString():
-	count = 1
-	seq = []
-	for c in arduinoData.read():
-		seq.append(chr(c))
-		joined_seq = ''.join(str(v) for v in seq)
+    count = 1
+    seq = []
+    for c in arduinoData.read():
+        seq.append(chr(c))
+        joined_seq = ''.join(str(v) for v in seq)
 
-		if chr(c) == '\n':
-			print("Line " + str(count) + ': ' + joined_seq)
-			seq = []
-			count += 1
-			break
+        if chr(c) == '\n':
+            print("Line " + str(count) + ': ' + joined_seq)
+            seq = []
+            count += 1
+            break
+
 
 def waitFor(char):
-	while readString() == "":
-		print("waiting")
-	print(readString())
+    while readString() == "":
+        print("waiting")
+    print(readString())
+
 
 def goHome():
-	for str in way:
-		arduinoData.write(str.encode())
-		delay(1)
-
-def waitArduino(kind = True):
-	plat = arduinoMon if kind else arduinoData
-	#input = str(plat.read()).split('\'\\x')[1].split('\'')[0]
-	input = str(plat.read())
-	while(not str(plat.read()).startswith("b")):
-		print(input)
-	print("Success")
-def evalM(str):
-        if arduinoMon != None:
-                print(str)
-        # bf.writeToFile("Commands", str)
-        # drawWayPart(str)
-                arduinoMon.write(str.encode())
-                delay(.5)
-                print("Success")  
+    for str in way:
+        arduinoData.write(str.encode())
+        delay(1)
 
 
 def eval(str):
-	print("Platform " + str)
-	# bf.writeToFile("Commands", str)
-	# drawWayPart(str)
-	delay(.5)
-	arduinoData.write(str.encode())
-	delay(.5)
-	# cmd = str.split("(")[0]
-	# if cmd == "f":
-	# 	way.append(str.replace("f", "b"))
-	# if cmd == "b":
-	# 	way.append(str.replace("b", "f"))
-	# if cmd == "r":
-	# 	way.append(str.replace("r", "l"))
-	# if cmd == "l":
-	# 	way.append(str.replace("l", "r"))
+    print(str)
+    # bf.writeToFile("Commands", str)
+    # drawWayPart(str)
+    try:
+        arduinoData.write(str.encode())
+        delay(.5)
+    except:
+        print("Err")
+# cmd = str.split("(")[0]
+# if cmd == "f":
+# 	way.append(str.replace("f", "b"))
+# if cmd == "b":
+# 	way.append(str.replace("b", "f"))
+# if cmd == "r":
+# 	way.append(str.replace("r", "l"))
+# if cmd == "l":
+# 	way.append(str.replace("l", "r"))
 
-	# if cmd == "f" or cmd == "b":
-	# 	delay(0.008*float(str.split("(")[1].split(")")[0]))
-	# elif cmd == "l" or cmd == "r":
-	# 	delay(0.055*float(str.split("(")[1].split(")")[0]))
+# if cmd == "f" or cmd == "b":
+# 	delay(0.008*float(str.split("(")[1].split(")")[0]))
+# elif cmd == "l" or cmd == "r":
+# 	delay(0.055*float(str.split("(")[1].split(")")[0]))
