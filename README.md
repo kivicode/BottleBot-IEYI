@@ -1,4 +1,4 @@
-![BottleBot](https://github.com/kivicode/BottleBot-IEYI/blob/master/img/preview.jpg?raw=true)
+<img src="./img/preview.jpg" height="500"/>
 
 # Struct:
 - Detection folder
