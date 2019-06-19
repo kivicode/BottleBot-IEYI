@@ -1,3 +1,5 @@
+![BottleBot](https://github.com/kivicode/BottleBot-IEYI/blob/master/img/preview.jpg?raw=true)
+
 # Struct:
 - Detection folder
 - Drawing folder + arduino parser
